@@ -1,12 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import { useForms } from '../../hooks/useForm';
-import { useDispatch } from 'react-redux';
+import validator from 'validator';
+import { useDispatch, useSelector } from 'react-redux';
 import { startLoginWithEmailAndPassword, startLoginWithGoogle } from '../../actions/auth';
+import { removeErrorMessage, setErrorMessage } from '../../actions/ui';
 
 export const LoginScreen = () => {
 
   const dispatch = useDispatch();
+  const {msgError} = useSelector(state=>state.ui);
 
   const [values, handleInputChange] = useForms({
     email: 'carloscarrete.sc@gmail.com',
@@ -17,19 +20,37 @@ export const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(startLoginWithEmailAndPassword(email, password));
+    if(isValid()){
+      dispatch(startLoginWithEmailAndPassword(email, password));
+    }
   }
 
   const handleLoginWithGoogle = (e) =>{
     e.preventDefault();
-    console.log('a');
     dispatch(startLoginWithGoogle());
+  }
+  
+  const isValid = () =>{
+    if(!validator.isEmail(email)){
+      dispatch(setErrorMessage('Email is invalid'));
+      return false;
+    }
+    dispatch(removeErrorMessage());
+    return true;
   }
 
   return (
     <div>
 
       <h3 className='auth__title'>LoginScreen</h3>
+      {
+        msgError&&
+        (
+        <div className='auth__alert-error'> 
+          {msgError}
+        </div>
+        )
+      }
 
       <form onSubmit={handleLogin}>
         <input type="text" placeholder="Email" name='email' className='auth__input' autoComplete='off' value={email} onChange={handleInputChange}/>
