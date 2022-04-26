@@ -5,14 +5,17 @@ import { googleAuthProvider,
      updateProfile,
      signInWithEmailAndPassword } from '../firebase/firebase-config';
 import {types} from '../types/types';
+import { finishLoading, startLoading } from './ui';
 
 export const startLoginWithEmailAndPassword = (email, password) =>{
     return(dispatch)=>{
+        dispatch(startLoading());
         signInWithEmailAndPassword(auth,email,password)
         .then(res=>{
             dispatch(login(res.user.uid, res.user.displayName))
+            dispatch(finishLoading());
         })
-        .catch(error=>console.log(error));
+        .catch(()=>dispatch());
     }
 }
 
