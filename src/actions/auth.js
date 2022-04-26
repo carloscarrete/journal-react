@@ -3,7 +3,8 @@ import { googleAuthProvider,
      signInWithPopup, 
      createUserWithEmailAndPassword, 
      updateProfile,
-     signInWithEmailAndPassword } from '../firebase/firebase-config';
+     signInWithEmailAndPassword,
+     signOut } from '../firebase/firebase-config';
 import {types} from '../types/types';
 import { finishLoading, startLoading } from './ui';
 
@@ -47,5 +48,18 @@ export const login = (uid, name) =>{
             uid,
             name,
         } 
+    }
+}
+
+export const startLogout = () =>{
+    return  async (dispatch)=>{
+        await signOut(auth);
+        dispatch(logout());
+    }
+}
+
+export const logout = ()=>{
+    return {
+        type: types.logout
     }
 }

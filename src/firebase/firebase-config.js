@@ -5,7 +5,8 @@ import { getAuth,
     createUserWithEmailAndPassword, 
     updateProfile,
     signInWithEmailAndPassword,
-    onAuthStateChanged } from "firebase/auth";
+    onAuthStateChanged,
+    signOut } from "firebase/auth";
 import { getFirestore } from 'firebase/firestore';
 
 
@@ -33,6 +34,7 @@ const firebaseConfig = {
        createUserWithEmailAndPassword,
        updateProfile,
        signInWithEmailAndPassword,
-       onAuthStateChanged
+       onAuthStateChanged,
+       signOut
    }
 
