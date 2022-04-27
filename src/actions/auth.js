@@ -7,16 +7,26 @@ import { googleAuthProvider,
      signOut } from '../firebase/firebase-config';
 import {types} from '../types/types';
 import { finishLoading, startLoading } from './ui';
+import Swal from 'sweetalert2'
 
 export const startLoginWithEmailAndPassword = (email, password) =>{
-    return(dispatch)=>{
+    return (dispatch)=>{
+
         dispatch(startLoading());
+
         signInWithEmailAndPassword(auth,email,password)
         .then(res=>{
             dispatch(login(res.user.uid, res.user.displayName))
             dispatch(finishLoading());
         })
-        .catch(()=>dispatch());
+        .catch( e=>{
+            dispatch(finishLoading());
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Verify your email or password to login',
+              })
+        });
     }
 }
 
@@ -37,6 +47,13 @@ export const startRegisterWithEmailAndPassword = (email, name, password) =>{
                 displayName: name
             })
             dispatch(login(user.uid, user.displayName));
+        })
+        .catch(e=>{
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Verify you have filled correctly your fields',
+              })
         })
     }
 }
