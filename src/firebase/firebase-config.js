@@ -6,8 +6,8 @@ import { getAuth,
     updateProfile,
     signInWithEmailAndPassword,
     onAuthStateChanged,
-    signOut } from "firebase/auth";
-import { getFirestore } from 'firebase/firestore';
+    signOut, } from "firebase/auth";
+import { getFirestore, doc, setDoc, collection, getDocs } from 'firebase/firestore';
 
 
 const firebaseConfig = {
@@ -35,6 +35,10 @@ const firebaseConfig = {
        updateProfile,
        signInWithEmailAndPassword,
        onAuthStateChanged,
-       signOut
-   }
+       signOut,
+       doc,
+       setDoc,
+       collection,
+       getDocs
+        }
 
