@@ -34,6 +34,18 @@
     width: 100%;
 }
 
+.btn-danger{
+    background-color: red;
+    border-radius: 2px;
+    text-align: center;
+
+    transition: background-color .3s ease;
+
+    &:hover{
+        background-color: darken($color: red, $amount: 15);
+    }
+}
+
 .google-btn {
     cursor: pointer;
     margin-top: 5px;

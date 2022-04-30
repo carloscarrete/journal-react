@@ -7,7 +7,7 @@ import { getAuth,
     signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut, } from "firebase/auth";
-import { getFirestore, doc, setDoc, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, collection, getDocs, updateDoc, deleteDoc } from 'firebase/firestore';
 
 
 const firebaseConfig = {
@@ -39,6 +39,8 @@ const firebaseConfig = {
        doc,
        setDoc,
        collection,
-       getDocs
+       getDocs,
+       updateDoc,
+       deleteDoc
         }
 
