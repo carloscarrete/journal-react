@@ -13,6 +13,13 @@ export const notesReducer = (state=initialState, action) => {
                 active: {
                     ...action.payload}  //Con esto se rompe la relación...es más común
             }
+        case types.notesAddNewNote:
+            return {
+                ...state,
+                notes: [action.payload, ...state.notes]
+                //Con lo anterior se pondria primero la note al agregar y posteriormente las demas
+                //notas que estan en el estado, se crea una nueva copia de las notas
+            }
         case types.notesLoadNotes:
             return{
                 ...state,

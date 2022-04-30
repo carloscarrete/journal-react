@@ -17,6 +17,7 @@ export const startNewNote = () => {
         await setDoc(ref, newNote)
 
         dispatch(activeNote(ref.id,newNote));
+        dispatch(addNewNote(ref.id, newNote));
     }
 }
 
@@ -136,6 +137,17 @@ export const startDeleting = (id) =>{
         dispatch(deleteNote(id));
      }
 }
+
+export const addNewNote = (id, note) =>{
+    return{
+        type: types.notesAddNewNote,
+        payload: {
+            id,
+            ...note
+        }
+    }
+}
+
 
 export const deleteNote = (id) =>{
     return{
