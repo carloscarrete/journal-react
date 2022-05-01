@@ -42,7 +42,7 @@ export const LoginScreen = () => {
   return (
     <div>
 
-      <h3 className='auth__title'>LoginScreen</h3>
+      <h3 className='auth__title'>Login</h3>
       {
         msgError&&
         (
@@ -52,15 +52,12 @@ export const LoginScreen = () => {
         )
       }
 
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} className="animate__animated animate__fadeIn animate__faster">
         <input type="text" placeholder="Email" name='email' className='auth__input' autoComplete='off' value={email} onChange={handleInputChange}/>
         <input type="password" placeholder="Password" name='password' className='auth__input' autoComplete='off' value={password} onChange={handleInputChange}/>
       <button type='submit' className='btn btn-primary btn-block' disabled={loading}>
         Login
       </button>
-      </form>
-
-
       <div className='auth__social-networks'>
         <p>Login with Social Media</p>
 
@@ -79,6 +76,7 @@ export const LoginScreen = () => {
       <Link to="/auth/register">
           Create new account  
         </Link>
+      </form>
     </div>
   )
 }
